@@ -1,4 +1,4 @@
 package com.example.springbootapi.models;
 
-public class Payment {
+public record Payment(Integer id, double amount) {
 }
