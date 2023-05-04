@@ -5,9 +5,6 @@ public class Product {
     private Integer id;
     private String title;
 
-    public Product() {
-    }
-
     public Product(Integer id, String title) {
         this.id = id;
         this.title = title;
