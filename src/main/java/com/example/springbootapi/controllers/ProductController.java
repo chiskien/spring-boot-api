@@ -55,6 +55,7 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
         logger.info("Delete product with " + id + " successfully");
         productService.deleteProduct(id);
-        return ResponseEntity.status(HttpStatus.OK).body(productService.getProducts());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productService.getProducts());
     }
 }

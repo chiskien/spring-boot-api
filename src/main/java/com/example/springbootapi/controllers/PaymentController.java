@@ -1,32 +1,29 @@
 package com.example.springbootapi.controllers;
 
-import com.example.springbootapi.models.PaymentDetail;
-import com.example.springbootapi.services.PaymentService;
+import com.example.springbootapi.models.Payment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
-@Controller
+@RestController
 public class PaymentController {
     private static final Logger logger = Logger
             .getLogger(PaymentController.class.getName());
 
-    private final PaymentService paymentService;
-
-    public PaymentController(PaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
-
-
     @PostMapping("/payment")
-    public ResponseEntity<?> makePayment(@RequestBody PaymentDetail paymentDetail) {
-        logger.info("Received payment " + paymentDetail.getAmount());
+    public ResponseEntity<Payment> createPayment(@RequestHeader String requestId,
+                                                 @RequestBody Payment payment) {
+        logger.info("Received request with ID: " + requestId +
+                "; Payment amount: " + payment.getAmount());
+        payment.setId(UUID.randomUUID().toString());
         return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body(paymentDetail);
+                .header("request Id", requestId)
+                .body(payment);
     }
-
 }
