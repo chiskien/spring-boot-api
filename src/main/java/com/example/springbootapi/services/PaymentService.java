@@ -13,7 +13,6 @@ import java.util.UUID;
 @Service
 public class PaymentService implements PaymentRepository {
     private final List<Payment> payments = new ArrayList<>();
-
     public PaymentDetail processPayment() {
         throw new NotEnoughMoneyException();
     }
@@ -34,9 +33,8 @@ public class PaymentService implements PaymentRepository {
     }
 
     @Override
-    public Payment createPayment(Payment payment) {
+    public void createPayment(Payment payment) {
         payments.add(payment);
-        return payment;
     }
 
 }

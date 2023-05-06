@@ -11,5 +11,5 @@ public interface PaymentRepository {
 
     Payment getById(String id);
 
-    Payment createPayment(Payment payment);
+    void createPayment(Payment payment);
 }
